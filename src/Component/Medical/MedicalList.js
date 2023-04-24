@@ -10,12 +10,13 @@ import { getAllMedicals } from "../../Redux/Reducers/Medical/medical.action.js";
 import MapView from '../MapView/MapView.js';
 import Pagination from '../Pagination/Pagination.js';
 import geolib from 'geolib';
-export default function MedicalList() {
+import MapG from '../MapView/GoogleMap/MapG.jsx';
+export default function MedicalList({ currentlocation }) {
     // const map = useMap()
     // console.log('map center:', map.getCenter())
     const [medicals, setMedicals] = useState([])
-    const [currentlocation, setCurrentlocation] = useState({});
-    const [mapmarker, setMapmarker] = useState([]);
+    // const [currentlocation, setCurrentlocation] = useState({});
+    const [mapmarker, setMapmarker] = useState();
     const [nearby, setNearby] = useState([]);
 
     //Pagination
@@ -34,23 +35,31 @@ export default function MedicalList() {
     const dispatch = useDispatch()
     const medicalData = useSelector(state => state.medical.medicals)
 
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setCurrentlocation({
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude
-            });
-            console.log(currentlocation)
-        });
-    }, []);
+    // useEffect(() => {
+    //     navigator.geolocation.getCurrentPosition((position) => {
+    //         setCurrentlocation({
+    //             latitude: position.coords.latitude,
+    //             longitude: position.coords.longitude
+    //         });
+    //         console.log(currentlocation)
+    //     });
+    // }, []);
     useEffect(() => {
         dispatch(getAllMedicals()).then((data) => {
             setLoading(false)
-            console.log(data.payload)
+            // console.log(data.payload)
             const mappoint = [];
-            data.payload?.map(({ coords, medicalname, _id }) => mappoint.push([coords, medicalname, _id]));
-            console.log(mappoint)
-            // setMapmarker(mappoint);
+            data.payload?.map(({ coords, medicalname, _id }) => mappoint.push(
+
+                {
+                    id: _id,
+                    medicalname: medicalname,
+                    location: { lat: parseFloat(coords.split(",")[0]), lng: parseFloat(coords.split(",")[1]) },
+                }
+
+            ));
+            // console.log(mappoint)
+            setMapmarker(mappoint);
             // console.log("mapmarker", mapmarker, currentlocation)
         })
     }, [])
@@ -71,39 +80,39 @@ export default function MedicalList() {
     //     });
     // console.log("set medicals worked",medicines)
     // console.log("set medicals worked", medicals, currentCards)
-    const getNearbyUsers = () => {
-        const lat = currentlocation.latitude;
-        const lng = currentlocation.longitude;
+    // const getNearbyUsers = () => {
+    //     const lat = currentlocation.latitude;
+    //     const lng = currentlocation.longitude;
 
-        console.log(lat, lng)
-        const nearbyMedicals = [];
+    //     console.log(lat, lng)
+    //     const nearbyMedicals = [];
 
-        medicals.forEach((medical) => {
-            const medicalcord = medical.coords.split(",")
-            console.log(medical.coords.split(","), medicalcord)
-            const R = 6371; // Radius of the Earth in km
-            const dLat = (medicalcord[0] - lat) * (Math.PI / 180);
-            const dLng = (medicalcord[1] - lng) * (Math.PI / 180);
-            const a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(lat * (Math.PI / 180)) *
-                Math.cos(medicalcord[0] * (Math.PI / 180)) *
-                Math.sin(dLng / 2) *
-                Math.sin(dLng / 2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            const d = R * c; // Distance between the two points in km
+    //     medicals.forEach((medical) => {
+    //         const medicalcord = medical.coords.split(",")
+    //         console.log(medical.coords.split(","), medicalcord)
+    //         const R = 6371; // Radius of the Earth in km
+    //         const dLat = (medicalcord[0] - lat) * (Math.PI / 180);
+    //         const dLng = (medicalcord[1] - lng) * (Math.PI / 180);
+    //         const a =
+    //             Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    //             Math.cos(lat * (Math.PI / 180)) *
+    //             Math.cos(medicalcord[0] * (Math.PI / 180)) *
+    //             Math.sin(dLng / 2) *
+    //             Math.sin(dLng / 2);
+    //         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    //         const d = R * c; // Distance between the two points in km
 
-            if (d <= 1) {
-                nearbyMedicals.push(medical);
-            } else {
-                console.log("no near by medicals")
-            }
-        });
+    //         if (d <= 1) {
+    //             nearbyMedicals.push(medical);
+    //         } else {
+    //             console.log("no near by medicals")
+    //         }
+    //     });
 
-        console.log(nearbyMedicals)
-    };
+    //     console.log(nearbyMedicals)
+    // };
 
-    console.log(getNearbyUsers(19.203202, 72.848688));
+    // console.log(getNearbyUsers(19.203202, 72.848688));
     return (
         <>
             {loading &&
@@ -128,7 +137,7 @@ export default function MedicalList() {
                                         objectFit='fill'
                                         src={item.medicalimage}
                                         alt="Medical image"
-                                         w="auto"
+                                        w="auto"
                                     />
                                 </Stack>
                                 <Stack w={["100%", "50%", "80%"]}>
@@ -199,7 +208,8 @@ export default function MedicalList() {
                 )
             }
             <Pagination cardsPerPage={cardsPerPage} totalCards={medicals.length} paginate={paginate} currentnumber={currentPage} />
-
+            {/* <MapView data={mapmarker} /> */}
+            <MapG data={mapmarker} />
             {/* <Box className='map-box' border="3px solid white" display='flex' ml={5}> */}
 
             {/* <MapContainer center={[19.203611, 72.848344]} zoom={13} scrollWheelZoom={false}>
