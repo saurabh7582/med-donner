@@ -15,7 +15,7 @@ import PageNotFound from "./Pages/PageNotFound";
 import EventRegister from "./Pages/EventRegister";
 import MedicalRegister from "./Pages/MedicalRegister";
 //redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getMySelf } from "./Redux/Reducers/User/user.action";
 import DonnerRegister from "./Pages/DonnorRegister";
 
@@ -24,6 +24,10 @@ function App() {
   useEffect(() => {
     dispatch(getMySelf());
   }, [localStorage]);
+
+  const user = useSelector((state) => state.user)
+console.log(user)
+
   return (
     <>
       <Routes>
