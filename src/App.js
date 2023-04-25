@@ -37,15 +37,22 @@ console.log(user)
         <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/donnor" element={<Donnor />} />
+        <Route path="/donor" element={<Donnor />} />
+        {/* donor register */}
+        {user && <Route path="/donnorregister" element={<DonnerRegister />} />}
+        <Route path="/donnorregister" element={<Navigate replace to="/signin" />} />
         <Route path="/donnorregister" element={<DonnerRegister />} />
         <Route path="/medical" element={<Medical />} />
         <Route path="/event" element={<Event />} />
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/eventregister" element={<EventRegister />} />
-        <Route path="/medicalregister" element={<MedicalRegister />} />
+        {/* event register */}
+        {user && <Route path="/eventregister" element={<EventRegister />} />}
+        <Route path="/eventregister" element={<Navigate replace to="/signin" />} />
+        {/* medical register */}
+        {user && <Route path="/medicalregister" element={<MedicalRegister />} />}
+        <Route path="/medicalregister" element={<Navigate replace to="/signin" />} />
         <Route path="/talknow" element={<TalkNow />} />
         {/* <Route path="/chat" element={<Chatbot />} /> */}
         <Route path="*" element={<PageNotFound />} />

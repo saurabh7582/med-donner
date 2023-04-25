@@ -14,7 +14,6 @@ export default function Work() {
 
   return (
     <Stack >
-    
         
         {/* what else we can do ? */}
         <Box
@@ -28,7 +27,7 @@ export default function Work() {
             // border="2px solid red"
         >
           {/* transalation start */}
-            <ScaleFade in={inView} initialScale={0.5}>
+
 
               <Heading 
                 fontFamily='IBM Plex Sans' fontStyle="normal" fontWeight="600" 
@@ -40,11 +39,11 @@ export default function Work() {
             <Flex justifyContent="center" >
                 <Divider w={["25%","20%","15%"]} align="center" borderColor="#20BC7E" orientation="horizontal" border="2px solid #20BC7E" />
             </Flex>
-            </ScaleFade>
+            
             {/* transalation end */}
 
              {/* transalation start */}
-             <ScaleFade in={inView} initialScale={0.5}>
+             
               
                 <Stack direction={['column','row','row']} ref={ref}>
                   {/* first half  */}
@@ -68,10 +67,9 @@ export default function Work() {
                   </Flex>
                 </Stack>
                 {/* translation end */}
-              </ScaleFade>
-
+             
             {/* transalation start */}
-            <ScaleFade in={inView} initialScale={0.5}>
+            
               <Stack direction={['column','row','row']} ref={ref}>
                 {/* first half  */}
                 
@@ -96,10 +94,10 @@ export default function Work() {
                 </Flex>
               </Stack>
             {/* transalation end */}
-            </ScaleFade>
+           
 
             {/* transalation start */}
-            <ScaleFade in={inView} initialScale={0.5} >
+           
 
               <Stack direction={['column','row','row']} ref={ref} >
                 {/* first half  */}
@@ -123,7 +121,7 @@ export default function Work() {
                 </Flex>
               </Stack>
               {/* transactions end */}
-            </ScaleFade>
+           
         </Box>
     </Stack>
   )

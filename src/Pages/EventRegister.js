@@ -8,7 +8,7 @@ import {
     Select,
     RadioGroup,
     Stack,
-    Radio,
+    Text,
     Button,
     Box,
 } from '@chakra-ui/react'
@@ -23,6 +23,8 @@ import ImageUpload from '../Component/ImageUpload'
 import { addEvent } from '../Redux/Reducers/Event/event.action'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { CheckCircleIcon , AttachmentIcon} from '@chakra-ui/icons'
+
 
 
 export default function EventRegister(props) {
@@ -43,6 +45,7 @@ export default function EventRegister(props) {
             .then(resp => resp.json())
             .then(data => {
                 setUrl(data.url)
+                console.log(setUrl)
             })
             .catch(err => console.log(err))
     }
@@ -55,7 +58,7 @@ export default function EventRegister(props) {
             dispatch(addEvent(formik.values)).then(data => {
                  console.log(data.payload)
                 if (data.payload._id) {
-                    alert("Event Registered Successfuly !")
+                    
                      navigate("/event")
                 } else {
                     alert("Error while Registration, try again !")
@@ -81,17 +84,17 @@ export default function EventRegister(props) {
             certificate: "",
         },
         validationSchema: Yup.object({
-            eventname: Yup.string(),
+            eventname: Yup.string().required("event name is required"),
             //dateTime: Yup.date().required("College Name requried"),
-            landmark: Yup.string(),
-            address: Yup.string(),
+            landmark: Yup.string().required("landmark is required"),
+            address: Yup.string().required("address is required"),
             //appartment: Yup.string().required("appartment required"),
-            city: Yup.string(),
-            state: Yup.string(),
+            city: Yup.string().required("city is required"),
+            state: Yup.string().required("State is required"),
             // pincode: Yup.number(),
-            coordinatorname: Yup.string(),
+            coordinatorname: Yup.string().required("co-ordinator name is required"),
             // certificate: Yup.boolean().required("certificate required"),
-            coordinatorphno: Yup.number(),
+            coordinatorphno: Yup.number().min(10).required("co-ordinator phone no. is required"),
             //whatsappNumber: Yup.number().min(10, "mobile no. should be 10 digit")
         }),
         onSubmit
@@ -137,7 +140,7 @@ export default function EventRegister(props) {
                     >
                         <Heading>Event Registration</Heading>
 
-                        <FormControl isInvalid={formik.errors.eventname && formik.touched.eventname}>
+                        <FormControl isRequired isInvalid={formik.errors.eventname && formik.touched.eventname}>
                             <FormLabel>College Name</FormLabel>
                             <Input
                                 name="eventname"
@@ -148,7 +151,7 @@ export default function EventRegister(props) {
                             <FormErrorMessage>{formik.errors.eventname}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.landmark && formik.touched.landmark}>
+                        <FormControl isRequired isInvalid={formik.errors.landmark && formik.touched.landmark}>
                             <FormLabel>Landmark</FormLabel>
                             <Input
                                 name="landmark"
@@ -160,7 +163,7 @@ export default function EventRegister(props) {
                             <FormErrorMessage>{formik.errors.landmark}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.address && formik.touched.address}>
+                        <FormControl isRequired isInvalid={formik.errors.address && formik.touched.address}>
                             <FormLabel>Address</FormLabel>
                             <Input
                                 name="address"
@@ -173,7 +176,7 @@ export default function EventRegister(props) {
                             <FormErrorMessage>{formik.errors.address}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.city && formik.touched.city}>
+                        <FormControl isRequired isInvalid={formik.errors.city && formik.touched.city}>
                             <FormLabel>City</FormLabel>
                             <Select
                                 id="city"
@@ -685,7 +688,7 @@ export default function EventRegister(props) {
                             <FormErrorMessage>{formik.errors.city}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.state && formik.touched.state}>
+                        <FormControl isRequired isInvalid={formik.errors.state && formik.touched.state}>
                             <FormLabel>State</FormLabel>
                             <Select placeholder='state' name="state" value={formik.values.state} onChange={formik.handleChange}>
                                 <option value='Andhra Pradesh'>Andhra Pradesh</option>
@@ -720,7 +723,7 @@ export default function EventRegister(props) {
                             <FormErrorMessage>{formik.errors.state}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl>
+                        <FormControl isRequired>  
                             <FormLabel>Start Date</FormLabel>
                             <Input
                                 name="startdate"
@@ -732,7 +735,7 @@ export default function EventRegister(props) {
                             />
                         </FormControl>
 
-                        <FormControl>
+                        <FormControl isRequired>
                             <FormLabel>End Date</FormLabel>
                             <Input
                                 name="enddate"
@@ -758,7 +761,7 @@ export default function EventRegister(props) {
                 <FormErrorMessage>{formik.errors.pincode}</FormErrorMessage>
             </FormControl> */}
 
-                        <FormControl isInvalid={formik.errors.coordinator && formik.touched.coordinator} >
+                        <FormControl isRequired isInvalid={formik.errors.coordinator && formik.touched.coordinator} >
                             <FormLabel>Co-Ordinator Name</FormLabel>
                             <Input
                                 name="coordinator"
@@ -770,7 +773,7 @@ export default function EventRegister(props) {
                             <FormErrorMessage>{formik.errors.coordinator}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.coordinatorphno && formik.touched.coordinatorphno} >
+                        <FormControl isRequired isInvalid={formik.errors.coordinatorphno && formik.touched.coordinatorphno} >
                             <FormLabel>Co-Ordinator Phone No.</FormLabel>
                             <Input
                                 name="coordinatorphno"
@@ -783,7 +786,7 @@ export default function EventRegister(props) {
                             <FormErrorMessage>{formik.errors.coordinatorphno}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.certificate && formik.touched.certificate} >
+                        {/* <FormControl isRequired isInvalid={formik.errors.certificate && formik.touched.certificate} >
                             <FormLabel>Certificate</FormLabel>
                             <RadioGroup name="certificate" onChange={formik.handleChange} value={formik.values.certificate} >
                                 <Stack direction='row'>
@@ -792,13 +795,13 @@ export default function EventRegister(props) {
                                 </Stack>
                             </RadioGroup>
                             <FormErrorMessage>{formik.errors.certificate}</FormErrorMessage>
-                        </FormControl>
-                        <FormControl>
+                        </FormControl> */}
+                        <FormControl isRequired>
                             <FormLabel>Upload Event Photo</FormLabel>
                             <Input isReadOnly="true" type="file" onChange={(e) => setImage(e.target.files[0])}></Input>
-                            <button onClick={uploadImage}>Upload</button>
                         </FormControl>
 
+                        <Button leftIcon={url ? <CheckCircleIcon /> : <AttachmentIcon /> }  onClick={uploadImage} alignSelf="center">{url ? "Uploaded" : "Upload"} </Button>
                         <Button type="submit" variant="outline" >
                             Submit
                         </Button>

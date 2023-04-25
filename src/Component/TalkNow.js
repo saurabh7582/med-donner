@@ -32,7 +32,7 @@ function TalkNow() {
 
   return (
     <Stack W="100%" >
-        <Box w={["70%","80%","90%"]} mt={10} h={["100%","100%","90vh"]} rounded={20} p="10" alignSelf="center" bg="gray.300">
+        <Box w={["70%","80%","90%"]} mt={10} h={["100%","100%","90vh"]} rounded={20} p="10" alignSelf="center" bg="gray.600">
             <Heading as="h4" fontSize={["xl","lg","lg"]} textAlign="center" color="red" >NOTE : Please upload image clearly so the donor can read prescription .</Heading>
             <Heading mt={5} as="h4" fontSize={["xl","lg","lg"]} textAlign="center" color="red" >This Is A Demo</Heading>
             <Image mt={5}  w="full" h="60%" objectFit="contain"

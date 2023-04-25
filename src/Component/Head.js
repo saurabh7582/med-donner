@@ -39,7 +39,7 @@ export default function Head() {
               Home
             </Button>
           </Link>
-          <Link href='/donnor' _focus="none" >
+          <Link href='/donor' _focus="none" >
             <Button as="a" variant='ghost' >
               Medicines
             </Button>

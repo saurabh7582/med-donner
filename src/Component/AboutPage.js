@@ -63,7 +63,7 @@ export default function AboutPage() {
                     > 
                     MedDonor aims to provide unused medicines for free. 
                     </Text>
-                    <Link href='/donor' w="full" alignSelf="flex-start" >
+                    <Link href='donor' w="full" alignSelf="flex-start" >
                       <Button 
                         rightIcon={<ArrowForwardIcon />}  color='#20BC7E' variant='link'
                         fontFamily="IBM Plex Sans" fontSize="28" lineheight="37" fontWeight="700" letterSpacing="0.023em"  

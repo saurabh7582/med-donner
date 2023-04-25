@@ -23,7 +23,7 @@ import ImageUpload from '../Component/ImageUpload'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
 import { addMedical } from '../Redux/Reducers/Medical/medical.action'
-
+import { CheckCircleIcon , AttachmentIcon} from '@chakra-ui/icons'
 
 export default function MedicalRegister() {
     const [location, setLocation] = useState()
@@ -141,18 +141,18 @@ export default function MedicalRegister() {
             coords: ""
         },
         validationSchema: Yup.object({
-            medicalname: Yup.string(),
+            medicalname: Yup.string().required("Medical Name is required"),
             //dateTime: Yup.date().required("College Name requried"),
-            landmark: Yup.string(),
-            address: Yup.string(),
+            landmark: Yup.string().required("Landmark Required"),
+            address: Yup.string().required("Address required"),
             //appartment: Yup.string().required("appartment required"),
-            city: Yup.string(),
-            state: Yup.string(),
+            city: Yup.string().required("City is required"),
+            state: Yup.string().required("State is required"),
             // pincode: Yup.number(),
-            coordinatorname: Yup.string(),
+            coordinatorname: Yup.string().required("co-ordinator name is required"),
             // certificate: Yup.boolean().required("certificate required"),
-            pincode: Yup.number(),
-            phone: Yup.number(),
+            pincode: Yup.number().min(6).required("Pincode is reuired"),
+            phone: Yup.number(10).required("Phone no. is required"),
             //whatsappNumber: Yup.number().min(10, "mobile no. should be 10 digit")
         }),
         onSubmit
@@ -217,7 +217,7 @@ export default function MedicalRegister() {
                     >
                         <Heading>Medical Registration</Heading>
 
-                        <FormControl isInvalid={formik.errors.medicalname && formik.touched.medicalname}>
+                        <FormControl isRequired isInvalid={formik.errors.medicalname && formik.touched.medicalname}>
                             <FormLabel>Medical Name</FormLabel>
                             <Input
                                 name="medicalname"
@@ -227,7 +227,7 @@ export default function MedicalRegister() {
                             />
                             <FormErrorMessage>{formik.errors.medicalname}</FormErrorMessage>
                         </FormControl>
-                        <FormControl isInvalid={formik.errors.phone && formik.touched.phone}>
+                        <FormControl isRequired isInvalid={formik.errors.phone && formik.touched.phone}>
                             <FormLabel>Contact Number</FormLabel>
                             <Input
                                 name="phone"
@@ -239,7 +239,7 @@ export default function MedicalRegister() {
                             />
                             <FormErrorMessage>{formik.errors.pincode}</FormErrorMessage>
                         </FormControl>
-                        <FormControl isInvalid={formik.errors.landmark && formik.touched.landmark}>
+                        <FormControl isRequired isInvalid={formik.errors.landmark && formik.touched.landmark}>
                             <FormLabel>Landmark</FormLabel>
                             <Input
                                 name="landmark"
@@ -251,7 +251,7 @@ export default function MedicalRegister() {
                             <FormErrorMessage>{formik.errors.landmark}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.address && formik.touched.address}>
+                        <FormControl isRequired isInvalid={formik.errors.address && formik.touched.address}>
                             <FormLabel>Address</FormLabel>
                             <Input
                                 name="address"
@@ -264,7 +264,7 @@ export default function MedicalRegister() {
                             <FormErrorMessage>{formik.errors.address}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.city && formik.touched.city}>
+                        <FormControl isRequired isInvalid={formik.errors.city && formik.touched.city}>
                             <FormLabel>City</FormLabel>
                             <Select
                                 id="city"
@@ -777,7 +777,7 @@ export default function MedicalRegister() {
                             <FormErrorMessage>{formik.errors.city}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.state && formik.touched.state}>
+                        <FormControl isRequired isInvalid={formik.errors.state && formik.touched.state}>
                             <FormLabel>State</FormLabel>
                             <Select
                                 placeholder='Maharashtra'
@@ -842,7 +842,7 @@ export default function MedicalRegister() {
                         </FormControl> */}
 
 
-                        <FormControl isInvalid={formik.errors.pincode && formik.touched.pincode}>
+                        <FormControl isRequired isInvalid={formik.errors.pincode && formik.touched.pincode}>
                             <FormLabel>Pincode</FormLabel>
                             <Input
                                 name="pincode"
@@ -855,7 +855,7 @@ export default function MedicalRegister() {
                             <FormErrorMessage>{formik.errors.pincode}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.coordinator && formik.touched.coordinator} >
+                        <FormControl isRequired isInvalid={formik.errors.coordinator && formik.touched.coordinator} >
                             <FormLabel>Owner Name</FormLabel>
                             <Input
                                 name="coordinator"
@@ -891,10 +891,12 @@ export default function MedicalRegister() {
                             <FormErrorMessage>{formik.errors.certificate}</FormErrorMessage>
                         </FormControl> */}
 
-                        <FormLabel>Upload Medical Photo</FormLabel>
-                        <Input isReadOnly="true" type="file" onChange={(e) => setImage(e.target.files[0])}></Input>
-                        <button onClick={uploadImage}>Upload</button>
-
+                        <FormControl isRequired alignItems="center" isInvalid={formik.errors.medimage && formik.touched.medimage}>
+                            <FormLabel>Upload Medical Photo</FormLabel>
+                            <Input isReadOnly="true" type="file" onChange={(e) => setImage(e.target.files[0])}></Input>
+                        </FormControl>
+                        
+                        <Button leftIcon={url ? <CheckCircleIcon /> : <AttachmentIcon /> }  onClick={uploadImage} alignSelf="center">{url ? "Uploaded" : "Upload"} </Button>
                         <Button type="submit" variant="outline" >
                             Submit
                         </Button>

@@ -23,6 +23,7 @@ import ImageUpload from '../Component/ImageUpload'
 import { addMedicine } from '../Redux/Reducers/Medicine/medicine.action'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
+import { CheckCircleIcon , AttachmentIcon} from '@chakra-ui/icons'
 
 export default function DonnerRegister(props) {
 
@@ -136,13 +137,14 @@ export default function DonnerRegister(props) {
         },
         validationSchema: Yup.object({
             // donorname: Yup.string(),
-            medname: Yup.string(),
-            category: Yup.string(),
+            medname: Yup.string().required("Medicien Name is required"),
+            category: Yup.string().required("Category Required"),
             desc: Yup.string(),
-            expiry: Yup.string(),
-            quantity: Yup.string(),
-            address: Yup.string(),
-            phone: Yup.number().min(10),
+            expiry: Yup.string().required("Expiry Required"),
+            quantity: Yup.string().required("Quantity Required"),
+            address: Yup.string().required("Address required"),
+            phone: Yup.number().min(10).required("Phone No. Required"),
+            medimage: Yup.string().required(" Medicen Image Required")
         }),
         onSubmit
     });
@@ -216,7 +218,7 @@ export default function DonnerRegister(props) {
                             />
                             <FormErrorMessage>{formik.errors.donorname}</FormErrorMessage>
                         </FormControl> */}
-                        <FormControl isInvalid={formik.errors.medname && formik.touched.medname}>
+                        <FormControl isRequired isInvalid={formik.errors.medname && formik.touched.medname}>
                             <FormLabel>Medicine Name</FormLabel>
                             <Input
                                 name="medname"
@@ -239,7 +241,7 @@ export default function DonnerRegister(props) {
                             <FormErrorMessage>{formik.errors.desc}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.category && formik.touched.category}>
+                        <FormControl isRequired isInvalid={formik.errors.category && formik.touched.category}>
                             <FormLabel>Medicine Category</FormLabel>
                             <Select placeholder='Select Category' name="" value={selectedcategory} onChange={handleChangeSelect}>
                                 <option value='Pain Killers'>Pain Killers</option>
@@ -287,7 +289,7 @@ export default function DonnerRegister(props) {
 
 
 
-                        <FormControl isInvalid={formik.errors.expiry && formik.touched.expiry}>
+                        <FormControl isRequired isInvalid={formik.errors.expiry && formik.touched.expiry}>
                             <FormLabel>Expiry</FormLabel>
                             <Input
                                 name="expiry"
@@ -299,7 +301,7 @@ export default function DonnerRegister(props) {
                             />
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.quantity && formik.touched.quantity}>
+                        <FormControl isRequired isInvalid={formik.errors.quantity && formik.touched.quantity}>
                             <FormLabel>Quantity</FormLabel>
                             <Input
                                 name="quantity"
@@ -312,7 +314,7 @@ export default function DonnerRegister(props) {
                             <FormErrorMessage>{formik.errors.quantity}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.phone && formik.touched.phone}>
+                        <FormControl isRequired isInvalid={formik.errors.phone && formik.touched.phone}>
                             <FormLabel>Contact Number</FormLabel>
                             <Input
                                 name="phone"
@@ -325,7 +327,7 @@ export default function DonnerRegister(props) {
                             <FormErrorMessage>{formik.errors.pincode}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.address && formik.touched.address}>
+                        <FormControl isRequired isInvalid={formik.errors.address && formik.touched.address}>
                             <FormLabel>Address</FormLabel>
                             <Input
                                 name="address"
@@ -338,12 +340,11 @@ export default function DonnerRegister(props) {
                             <FormErrorMessage>{formik.errors.address}</FormErrorMessage>
                         </FormControl>
 
-                        <FormControl isInvalid={formik.errors.medimage && formik.touched.medimage}>
-                            <FormLabel>Upload Medical Photo</FormLabel>
+                        <FormControl isRequired alignItems="center" isInvalid={formik.errors.medimage && formik.touched.medimage}>
+                            <FormLabel>Upload Medicine Photo</FormLabel>
                             <Input isReadOnly="true" type="file" onChange={(e) => setImage(e.target.files[0])}></Input>
-                            <button onClick={uploadImage}>Upload</button>
                         </FormControl>
-
+                        <Button leftIcon={url ? <CheckCircleIcon /> : <AttachmentIcon /> }  onClick={uploadImage} alignSelf="center">{url ? "Uploaded" : "Upload"} </Button>
                         <Button type="submit" variant="outline" >
                             Submit
                         </Button>
