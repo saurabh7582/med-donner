@@ -135,12 +135,14 @@ export default function MedicalList({ currentlocation }) {
                         <Card key={index}>
                             <Stack direction={['column', "row", "row"]}>
                                 <Stack w={["100%", "25%", "25%"]} >
-                                    <Image
-                                        objectFit='fill'
-                                        src={item.medicalimage}
-                                        alt="Medical image"
-                                        w="auto"
-                                    />
+                                    <Box >
+                                        <Image
+                                            src={item.medicalimage}
+                                            alt="Medical image"
+                                            objectFit="cover"
+                                            objectPosition="center"
+                                        />
+                                    </Box>
                                 </Stack>
                                 <Stack w={["100%", "50%", "80%"]}>
                                     <CardHeader>
@@ -153,7 +155,7 @@ export default function MedicalList({ currentlocation }) {
                                                 <Heading
                                                     fontFamily="IBM Plex Sans" fontWeight="bold" fontSize="16px"
                                                     lineHeight="21px"
-                                                > Working Hours : {item.workinghour}</Heading>
+                                                > Working Hours : {item.workinghour ? item.workinghour : "6Am-12Pm"}</Heading>
                                                 <Heading
                                                     fontFamily="IBM Plex Sans" fontStyle="normal" fontWeight="500" fontSize="16px"
                                                     lineHeight="21px"
@@ -212,7 +214,7 @@ export default function MedicalList({ currentlocation }) {
             <Pagination cardsPerPage={cardsPerPage} totalCards={medicals.length} paginate={paginate} currentnumber={currentPage} />
             {/* <MapView data={mapmarker} /> */}
 
-            <MapG data={mapmarker} />
+            {/* <MapG data={mapmarker} /> */}
 
             {/* <Box className='map-box' border="3px solid white" display='flex' ml={5}> */}
 

@@ -26,8 +26,6 @@ import { addMedical } from '../Redux/Reducers/Medical/medical.action'
 
 
 export default function MedicalRegister() {
-    const [latitude, setLatitude] = useState("");
-    const [longitude, setLongtitude] = useState("");
     const [location, setLocation] = useState()
     const [selectedMarker, setSelectedMarker] = useState("");
 
