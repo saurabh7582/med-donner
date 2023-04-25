@@ -39,13 +39,12 @@ export const getEvent = (_id) => async (dispatch) => {
 }
 export const addEvent = (data) => async (dispatch) => {
     try {
-        console.log("Data recev in event add action ", data)
         const addedEvent = await axios({
             method: "POST",
             url: `${process.env.REACT_APP_CLIENT_URL}/event/new`,//http://localhost:4000  ${process.env.REACT_APPCLIENT_URL}
-            data: { eventData: data }
+            data: { data }
         });
-        return dispatch({ type: ADD_EVENT, payload: addedEvent });
+        return dispatch({ type: ADD_EVENT, payload: addedEvent.data.data });
     }
     catch (error) {
         return dispatch({ type: "ERROR", payload: error });
@@ -90,7 +89,7 @@ export const getCityEvents = (city) => async (dispatch) => {
             url: `${process.env.REACT_APP_CLIENT_URL}/event/city/${city}`,//http://localhost:4000  ${process.env.REACT_APPCLIENT_URL}
         });
         console.log("from event acion", events)
-        return dispatch({ type: GET_CITY_EVENTS, payload: events.data.message });
+        return dispatch({ type: GET_CITY_EVENTS, payload: events.data.data });
     }
     catch (error) {
         return dispatch({ type: "ERROR", payload: error });
@@ -103,7 +102,7 @@ export const getCertificateEvents = () => async (dispatch) => {
             method: "GET",
             url: `${process.env.REACT_APP_CLIENT_URL}/event/`,//http://localhost:4000  ${process.env.REACT_APPCLIENT_URL}
         });
-        return dispatch({ type: GET_CERTIFICATE_EVENT, payload: events.data.message });
+        return dispatch({ type: GET_CERTIFICATE_EVENT, payload: events.data.data });
     }
     catch (error) {
         return dispatch({ type: "ERROR", payload: error });

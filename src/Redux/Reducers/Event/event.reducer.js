@@ -17,7 +17,7 @@ const eventReducer = (state = intialState, action) => {
     switch (action.type) {
         case ADD_EVENT: return {
             ...state,
-            ...action.payload
+            selectedEvent: action.payload
         };
         case GET_ALL_EVENTS: return {
             ...state,
@@ -37,7 +37,7 @@ const eventReducer = (state = intialState, action) => {
         };
         case GET_CITY_EVENTS: return {
             ...state,
-            events: [...action.payload]
+            events: action.payload
         };
         case GET_CERTIFICATE_EVENT: return {
             ...state,
