@@ -27,7 +27,7 @@ import { CheckCircleIcon , AttachmentIcon} from '@chakra-ui/icons'
 
 export default function DonnerRegister(props) {
 
-    const [selectedcategory, setSelectedcategory] = useState("City")
+    const [selectedcategory, setSelectedcategory] = useState("")
 
     const [image, setImage] = useState("");
     const [url, setUrl] = useState("");

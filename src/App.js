@@ -31,8 +31,16 @@ console.log(user)
   return (
     <>
       <Routes>
+
         {/* {user && <Route path="/" exact element={<Home />} />}
         <Route path="/" exact element={<Navigate replace to="/signin" />} /> */}
+
+
+
+        <Route path="/donnorregister" element={<DonnerRegister />} />
+        <Route path="/eventregister" element={<EventRegister />} />
+        <Route path="/medicalregister" element={<MedicalRegister />} />
+
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
