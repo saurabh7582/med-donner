@@ -45,7 +45,7 @@ export default function EventRegister(props) {
             .then(resp => resp.json())
             .then(data => {
                 setUrl(data.url)
-                console.log(setUrl)
+                // console.log(setUrl)
             })
             .catch(err => console.log(err))
     }
