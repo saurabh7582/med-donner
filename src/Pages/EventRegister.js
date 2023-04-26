@@ -56,9 +56,9 @@ export default function EventRegister(props) {
             formik.values.eventimage = url
             console.log(formik.values)
             dispatch(addEvent(formik.values)).then(data => {
-                 console.log(data.payload)
+                  console.log(data.payload)
                 if (data.payload._id) {
-                    
+                    alert("Event Registered Successfuly !")
                      navigate("/event")
                 } else {
                     alert("Error while Registration, try again !")

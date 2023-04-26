@@ -71,12 +71,12 @@ export default function Head() {
           </Link>
         </Flex>
         <Flex alignSelf="flex-end" pl={15}>
-          <Tooltip label='Github' >
+          {/* <Tooltip label='Github' >
             <Link href='https://github.com/saurabh7582/med-donor' _focus="none" isExternal>
               <IconButton ml={2} icon={<FaGithub />} isRound='true' ></IconButton>
             </Link>
-          </Tooltip>
-          <Tooltip label='Mode' >
+          </Tooltip> */}
+          <Tooltip label='Colour change' >
             <IconButton ml={8} icon={isDark ? <FaSun /> : <FaMoon />} isRound='true' onClick={toggleColorMode}></IconButton>
           </Tooltip>
 

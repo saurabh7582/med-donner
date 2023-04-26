@@ -35,8 +35,6 @@ console.log(user)
         {/* {user && <Route path="/" exact element={<Home />} />}
         <Route path="/" exact element={<Navigate replace to="/signin" />} /> */}
 
-
-
         <Route path="/donnorregister" element={<DonnerRegister />} />
         <Route path="/eventregister" element={<EventRegister />} />
         <Route path="/medicalregister" element={<MedicalRegister />} />
