@@ -802,7 +802,7 @@ export default function EventRegister(props) {
                         </FormControl>
 
                         <Button leftIcon={url ? <CheckCircleIcon /> : <AttachmentIcon /> }  onClick={uploadImage} alignSelf="center">{url ? "Uploaded" : "Upload"} </Button>
-                        <Button type="submit" variant="outline" >
+                        <Button type="submit" variant="outline" onClick={onSubmit}>
                             Submit
                         </Button>
 

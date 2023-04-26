@@ -8,7 +8,6 @@ import SignUp from "./Pages/SignUp";
 import Medical from "./Pages/Medical";
 import TalkNow from "./Component/TalkNow";
 import SignIn from "./Pages/SignIn";
-import Donnor from "./Pages/Donnor";
 import Contact from "./Pages/Contact";
 import Services from "./Pages/Services";
 import PageNotFound from "./Pages/PageNotFound";
@@ -18,6 +17,7 @@ import MedicalRegister from "./Pages/MedicalRegister";
 import { useDispatch, useSelector } from "react-redux";
 import { getMySelf } from "./Redux/Reducers/User/user.action";
 import DonnerRegister from "./Pages/DonnorRegister";
+import Donor from "./Pages/Donor";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ function App() {
   }, [localStorage]);
 
   const user = useSelector((state) => state.user)
-console.log(user)
+// console.log(user)
 
   return (
     <>
@@ -43,7 +43,7 @@ console.log(user)
         <Route path="/home" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/donor" element={<Donnor />} />
+        <Route path="/donor" element={<Donor />} />
         {/* donor register */}
         {user && <Route path="/donnorregister" element={<DonnerRegister />} />}
         <Route path="/donnorregister" element={<Navigate replace to="/signin" />} />

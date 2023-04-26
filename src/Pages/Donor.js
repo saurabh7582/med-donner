@@ -11,7 +11,7 @@ import Head from '../Component/Head'
 import MedicineCard from '../Component/Medicinelist'
 import { getMedicines } from '../Redux/Reducers/Medicine/medicine.action'
 
-export default function Donnor() {
+export default function Donor() {
   const ref = useRef(null);
   // const [medicines, setMedicines] = useState([])
   // const dispatch = useDispatch()

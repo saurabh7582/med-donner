@@ -93,7 +93,7 @@ export default function DonnerRegister(props) {
                 console.log(data.payload._id)
                 if (data.payload._id) {
                     alert("Medicine Registered Successfuly !")
-                    navigate("/donnor")
+                    navigate("/donor")
                 } else {
                     alert("Error while Registration, try again !")
                     navigate("/donnorregister")
@@ -345,7 +345,7 @@ export default function DonnerRegister(props) {
                             <Input isReadOnly="true" type="file" onChange={(e) => setImage(e.target.files[0])}></Input>
                         </FormControl>
                         <Button leftIcon={url ? <CheckCircleIcon /> : <AttachmentIcon /> }  onClick={uploadImage} alignSelf="center">{url ? "Uploaded" : "Upload"} </Button>
-                        <Button type="submit" variant="outline" >
+                        <Button type="submit" variant="outline" onClick={onSubmit}>
                             Submit
                         </Button>
 

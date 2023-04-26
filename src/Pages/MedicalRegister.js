@@ -86,6 +86,7 @@ export default function MedicalRegister() {
 
     // console.log(location)
     const onSubmit = () => {
+        console.log(location,url,formik.values)
         if (url && !formik.values.medicalimage) {
             formik.values.coords = location
             formik.values.medicalimage = url
@@ -895,9 +896,9 @@ export default function MedicalRegister() {
                             <FormLabel>Upload Medical Photo</FormLabel>
                             <Input isReadOnly="true" type="file" onChange={(e) => setImage(e.target.files[0])}></Input>
                         </FormControl>
+                            <Button leftIcon={url ? <CheckCircleIcon /> : <AttachmentIcon /> }  onClick={uploadImage} alignSelf="center">{url ? "Uploaded" : "Upload"} </Button>
                         
-                        <Button leftIcon={url ? <CheckCircleIcon /> : <AttachmentIcon /> }  onClick={uploadImage} alignSelf="center">{url ? "Uploaded" : "Upload"} </Button>
-                        <Button type="submit" variant="outline" >
+                        <Button type="submit" variant="outline" onClick={onSubmit}>
                             Submit
                         </Button>
 
